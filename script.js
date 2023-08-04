@@ -2,6 +2,7 @@ const container = document.querySelector("#container");
 const penColor = "rgb(60,60,60)";
 const gridSizer = document.querySelector(".gridSizer");
 const gridSizeDisplay = document.querySelector("p.gridSizer");
+const clearButton = document.querySelector(".clearButton")
 
 let pixelHeightAndWidth = 10;
 let numPixels = 4096;
@@ -24,7 +25,6 @@ function pushPixels() {
         });
         container.appendChild(pixel);
     }
-    console.log(pixel.style.width);
 }
 
 // Need to fix this while loop somehow
@@ -44,12 +44,16 @@ gridSizer.addEventListener("mousemove", () => {
 gridSizer.addEventListener("change", () => {
     numPixels = (gridSizer.value * gridSizer.value);
     pixelHeightAndWidth = (640 / gridSizer.value);
-    console.log(pixelHeightAndWidth)
     clearPixels();
     pushPixels();
 });
 
 gridSizeDisplay.textContent = `${gridSizer.value} X ${gridSizer.value}`;
+
+clearButton.addEventListener("click", () => {
+    clearPixels();
+    pushPixels();
+})
 
 pushPixels();
 
